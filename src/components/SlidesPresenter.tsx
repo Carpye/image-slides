@@ -9,22 +9,22 @@ const SlidesPresenter = ({ images }: { images: string[] }) => {
   const [isFirstSlide, setIsFirstSlide] = useState(true)
   const [isLastSlide, setIsLastSlide] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [loadedImages, setLoadedImages] = useState<string[]>([])
-  useEffect(() => {
-    async function handleContentLoaded() {
-      const promises = images.map((image) => {
-        return new Promise<string>((resolve) => {
-          const img = document.createElement("img")
-          img.onload = () => resolve(image)
-          img.src = image
-        })
-      })
-      const loadedImages = await Promise.all(promises)
-      setLoadedImages(loadedImages as string[])
-    }
+  // const [loadedImages, setLoadedImages] = useState<string[]>([])
+  // useEffect(() => {
+  //   async function handleContentLoaded() {
+  //     const promises = images.map((image) => {
+  //       return new Promise<string>((resolve) => {
+  //         const img = document.createElement("img")
+  //         img.onload = () => resolve(image)
+  //         img.src = image
+  //       })
+  //     })
+  //     const loadedImages = await Promise.all(promises)
+  //     setLoadedImages(loadedImages as string[])
+  //   }
 
-    handleContentLoaded()
-  }, [images])
+  //   handleContentLoaded()
+  // }, [images])
 
   useEffect(() => {
     const keyDownHandler = (e: KeyboardEvent) => {
@@ -84,7 +84,7 @@ const SlidesPresenter = ({ images }: { images: string[] }) => {
         <Loader2 className="animate-spin h-24 w-24" />
       </div>
       <Image
-        src={loadedImages[slide - 1] ?? images[0]}
+        src={images[slide - 1] ?? images[0]}
         alt="slide"
         fill
         quality={100}
